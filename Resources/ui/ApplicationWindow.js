@@ -37,11 +37,11 @@ function ApplicationWindow() {
 	var isToggled = false;
 	var animateLeft	= Ti.UI.createAnimation({
 		left: 200,
-		duration: 500
+		duration: 300
 	});
 	var animateRight	= Ti.UI.createAnimation({
 		left: 0,
-		duration: 500
+		duration: 200
 	});	
 	Ti.App.addEventListener('iLepraToggleMenu',function(e){
 		if( !isToggled ){

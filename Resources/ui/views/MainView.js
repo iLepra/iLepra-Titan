@@ -85,27 +85,7 @@ function MainView() {
 	    height: 40,
 	    borderTop:false,
 	    borderBottom:true,
-	    barColor:'#000',
-	    translucent: true,
-	    backgroundGradient: {
-	    	type: 'linear',
-			startPoint: {
-				x: '50%',
-				y: '0px'
-			},
-			endPoint: {
-				x: '50%',
-				y: '40px'
-			},
-			colors: [
-			{
-      			color: '#333',
-  				offset: 0.0
-			}, {
-  				color: '#000',
-      			offset: 1.0
-    		}]
-		}
+	    barColor:'#000'
 	}); 
 	self.add(toolbar);
 	
