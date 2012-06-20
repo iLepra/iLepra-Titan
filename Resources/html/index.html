@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <title>iLepra</title>
+    <!-- jquery mobile style -->
+    <link rel="stylesheet"  href="./css/jquery.mobile.min.css" />
+    <!-- fixed toolbars polyfill -->
+    <link rel="stylesheet" href="./css/jquery.mobile.fixedToolbar.polyfill.css" />
+
+    <!-- app style -->
+    <link rel="stylesheet"  href="./css/main.css" />
+
+    <!-- jquery -->
+    <script src="./libs/jquery.min.js"></script>
+    <!-- css transitions -->
+    <script src="./libs/jquery.transit.min.js"></script>
+    <!-- jquery mobile -->
+    <script src="./libs/jquery.mobile.min.js"></script>
+    <!-- fixed toolbars polyfill -->
+    <script src="./libs/jquery.mobile.fixedToolbar.polyfill.js"></script>
+
+    <!-- templates -->
+    <script src="./libs/underscore-min.js"></script>
+    <script src="./js/templates.js"></script>
+
+    <!-- iLepra library -->
+    <script src="./lepra/lepra.js"></script>
+    <script src="./lepra/lepra.util.js"></script>
+    <script src="./lepra/lepra.ui.js"></script>
+    <script src="./lepra/lepra.post.js"></script>
+    <script src="./lepra/lepra.profile.js"></script>
+    <script src="./lepra/lepra.sub.js"></script>
+    <script src="./lepra/lepra.gov.js"></script>
+    <script src="./lepra/lepra.chat.js"></script>
+
+    <!-- main logic -->
+    <script src="./js/main.js"></script>
+
+    <!-- counts logic -->
+    <script src="./js/counters.js"></script>
+
+    <!-- handlers logic -->
+    <script src="./js/handlers.js"></script>
+
+    <!-- mystuff logic -->
+    <script src="./js/mystuff.js"></script>
+
+    <!-- inbox logic -->
+    <script src="./js/inbox.js"></script>
+    
+    <!-- posts stuff -->
+    <script src="./js/posts.js"></script>
+    <script src="./js/comments.js"></script>
+
+    <!-- more stuff -->
+    <script src="./js/more.js"></script>
+    <script src="./js/favs.js"></script>
+    <script src="./js/profile.js"></script>
+    <script src="./js/subs.js"></script>
+    <script src="./js/gov.js"></script>
+    <script src="./js/chat.js"></script>
+</head>
+<body>
+	<!-- BLANK SPLASH FOR LOADING STATE -->
+	<div data-role="page" id="splashPage">
+	</div>
+	
+	<!-- LOGIN PAGE -->
+	<div data-role="page" id="loginPage" data-theme="d">
+	    <div data-role="content">
+	
+	        <input type="text" name="username" id="username" placeholder="Логин"/>
+	
+	        <input type="password" name="pass" id="pass" placeholder="Пароль"/>
+	
+	        <div style="text-align:center; margin-top: 5px;">
+	            <img id="captchaImage" />
+	        </div>
+	
+	        <input type="text" name="captcha" id="captcha" placeholder="Капча"/>
+	
+	        <br/>
+	
+	        <input type="checkbox" name="rememberme" id="rememberme" />
+	        <label for="rememberme">Запомнить меня</label>
+	
+	        <br/>
+	
+	        <a href="#" id="loginButton" data-role="button">Yarr!</a>
+	    </div>
+	</div>
+	
+	<!-- MAIN POSTS PAGE -->
+	<div data-role="page" id="postsPage">
+	    <div data-role="content">
+	        <div style="position: absolute; display: none;">
+	            <select id="layoutSelect" data-mini="true" data-inline="true">
+	                <option value="main">Главная</option>
+	                <option value="all">Все</option>
+	                <option value="sub">Подлепры</option>
+	            </select>
+	        </div>
+	        <ul data-role="listview" id="postsList">
+	        </ul>
+	        <br/>
+	        <a href="#" data-role="button" id="morePostsButton" style="display:none;">Еще? Еще!</a>
+	    </div>
+	</div>
+	
+	<!-- MYSTUFF POSTS PAGE -->
+	<div data-role="page" id="mystuffPage">	
+	    <div data-role="content">
+	        <ul data-role="listview" id="mystuffList" data-divider-theme="a">
+	        </ul>
+	        <br/>
+	        <a href="#" data-role="button" id="moreMystuffButton" style="display:none;">Еще? Еще!</a>
+	    </div>
+	</div>
+	
+	<!-- INBOX POSTS PAGE -->
+	<div data-role="page" id="inboxPage">
+	    <div data-role="content">
+	        <ul data-role="listview" id="inboxList" data-divider-theme="a">
+	        </ul>
+	        <br/>
+	        <a href="#" data-role="button" id="moreInboxButton" style="display:none;">Еще? Еще!</a>
+	    </div>
+	</div>
+	
+	<!-- FAVS PAGE -->
+	<div data-role="page" id="favsPage" data-add-back-btn="true">
+	    <div data-role="content">
+	        <ul data-role="listview" id="favsList" data-divider-theme="a">
+	        </ul>
+	        <br/>
+	        <a href="#" data-role="button" id="moreFavsButton" style="display:none;">Еще? Еще!</a>
+	    </div>
+	</div>
+	
+	<!-- SUBS PAGE -->
+	<div data-role="page" id="subsPage" data-add-back-btn="true">
+	    <div data-role="content">
+	        <ul data-role="listview" id="subsList">
+	        </ul>
+	    </div>
+	</div>
+	
+	<!-- CHAT PAGE -->
+	<div data-role="page" id="chatPage" data-add-back-btn="true">
+	    <div data-role="content">
+	        <ul data-role="listview" id="chatList" data-divider-theme="a">
+	        </ul>
+	    </div>
+	
+	    <!--<div data-role="footer" data-position="fixed">
+	        <div class="ui-grid-a">
+	            <div class="ui-block-a" style="width:79%">
+	                <input type="text" id="chatInput" value="" placeholder="Написать в чятик" data-mini='true'  />
+	            </div>
+	            <div class="ui-block-b" style="width:19%">
+	                <a href="#" id="submitChat" data-role="button" data-mini='true' class="maxedFootButton">OK</a>
+	            </div>
+	        </div><!-- /grid-a 
+	    </div> -->
+	</div>
+	
+	<!-- GOV PAGE -->
+	<div data-role="page" id="govPage" data-add-back-btn="true">
+	    <div data-role="content">
+	        <p id="president">
+	        </p>
+	    </div>
+	</div>
+
+</body>
+</html>
