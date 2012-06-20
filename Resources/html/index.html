@@ -6,61 +6,23 @@
     <title>iLepra</title>
     <!-- jquery mobile style -->
     <link rel="stylesheet"  href="./css/jquery.mobile.min.css" />
-    <!-- fixed toolbars polyfill -->
-    <link rel="stylesheet" href="./css/jquery.mobile.fixedToolbar.polyfill.css" />
 
     <!-- app style -->
     <link rel="stylesheet"  href="./css/main.css" />
 
     <!-- jquery -->
     <script src="./libs/jquery.min.js"></script>
-    <!-- css transitions -->
-    <script src="./libs/jquery.transit.min.js"></script>
     <!-- jquery mobile -->
     <script src="./libs/jquery.mobile.min.js"></script>
-    <!-- fixed toolbars polyfill -->
-    <script src="./libs/jquery.mobile.fixedToolbar.polyfill.js"></script>
 
-    <!-- templates -->
+    <!-- templates engine -->
     <script src="./libs/underscore-min.js"></script>
-    <script src="./js/templates.js"></script>
 
     <!-- iLepra library -->
-    <script src="./lepra/lepra.js"></script>
-    <script src="./lepra/lepra.util.js"></script>
-    <script src="./lepra/lepra.ui.js"></script>
-    <script src="./lepra/lepra.post.js"></script>
-    <script src="./lepra/lepra.profile.js"></script>
-    <script src="./lepra/lepra.sub.js"></script>
-    <script src="./lepra/lepra.gov.js"></script>
-    <script src="./lepra/lepra.chat.js"></script>
-
-    <!-- main logic -->
-    <script src="./js/main.js"></script>
-
-    <!-- counts logic -->
-    <script src="./js/counters.js"></script>
-
-    <!-- handlers logic -->
-    <script src="./js/handlers.js"></script>
-
-    <!-- mystuff logic -->
-    <script src="./js/mystuff.js"></script>
-
-    <!-- inbox logic -->
-    <script src="./js/inbox.js"></script>
+    <script src="./lepra/lepra.min.js"></script>
     
-    <!-- posts stuff -->
-    <script src="./js/posts.js"></script>
-    <script src="./js/comments.js"></script>
-
-    <!-- more stuff -->
-    <script src="./js/more.js"></script>
-    <script src="./js/favs.js"></script>
-    <script src="./js/profile.js"></script>
-    <script src="./js/subs.js"></script>
-    <script src="./js/gov.js"></script>
-    <script src="./js/chat.js"></script>
+    <!-- main logic -->
+    <script src="./js/logic.min.js"></script>
 </head>
 <body>
 	<!-- BLANK SPLASH FOR LOADING STATE -->
@@ -153,17 +115,6 @@
 	        <ul data-role="listview" id="chatList" data-divider-theme="a">
 	        </ul>
 	    </div>
-	
-	    <!--<div data-role="footer" data-position="fixed">
-	        <div class="ui-grid-a">
-	            <div class="ui-block-a" style="width:79%">
-	                <input type="text" id="chatInput" value="" placeholder="Написать в чятик" data-mini='true'  />
-	            </div>
-	            <div class="ui-block-b" style="width:19%">
-	                <a href="#" id="submitChat" data-role="button" data-mini='true' class="maxedFootButton">OK</a>
-	            </div>
-	        </div><!-- /grid-a 
-	    </div> -->
 	</div>
 	
 	<!-- GOV PAGE -->
