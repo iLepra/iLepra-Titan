@@ -151,7 +151,14 @@ function MainView() {
 	chatInput.addEventListener('focus', function(){
 		chatbar.bottom = 216;
 	});
-	chatInput.addEventListener('blur', repositionChat)
+	chatInput.addEventListener('blur', function(){
+		var val = chatInput.value;
+		chatInput.value = "";
+
+		Ti.App.fireEvent("iLepraSubmitChat", {val: val});
+
+		repositionChat();
+	})
 	chatInput.addEventListener('return', repositionChat)
 	var chatButton = Ti.UI.createButton({ systemButton: Ti.UI.iPhone.SystemButton.DONE });
 	chatButton.addEventListener('click', function(){
@@ -175,7 +182,9 @@ function MainView() {
 			web.bottom = 0;
 			self.remove(chatbar);
 		}
-		
+	})
+	Ti.App.addEventListener("iLepraChatText", function(data){
+		chatInput.value = data.val;
 	})
 	
 	return self;
