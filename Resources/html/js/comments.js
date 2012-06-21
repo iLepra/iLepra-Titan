@@ -202,7 +202,7 @@
                 // hide
                 $.mobile.hidePageLoadingMsg();
                 // show error
-                iLepra.ui.showError("Ошибка добавлени комментария! Попробуйте еще раз?");
+                iLepra.ui.showError("Ошибка добавления комментария! Попробуйте еще раз?");
             });
 
             // on successful comment
