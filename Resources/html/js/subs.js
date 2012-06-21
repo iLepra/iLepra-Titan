@@ -22,7 +22,7 @@ $(window).load(function(){
 
     // render page on creation
     $(document).on('pageshow', "#subsPage", function(){
-    	Ti.App.fireEvent("iLepraChangeTitle", {title: "Подлерпы"});
+    	Ti.App.fireEvent("iLepraChangeTitle", {title: "Подлепры"});
     	
         subsList = $("#subsList");
         subsList.empty();
