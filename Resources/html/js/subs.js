@@ -21,7 +21,7 @@ $(window).load(function(){
     }
 
     // render page on creation
-    $(document).on('pageshow', "#subsPage", function(){
+    $(document).on('pagebeforeshow', "#subsPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Подлерпы"});
     	
         subsList = $("#subsList");
@@ -45,7 +45,7 @@ $(window).load(function(){
     });
 
     // sub click
-    $(document).on(iLepra.config.defaultTapEvent, "a.subListItem", function(e){
+    $(document).on("tap", "a.subListItem", function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
 
@@ -69,7 +69,7 @@ $(window).load(function(){
         }catch(e){}
     }
 
-    $(document).on('pageshow', "#subpostsPage", function(){
+    $(document).on('pagebeforeshow', "#subpostsPage", function(){
         subpostsList = $("#subpostsList");
         moreSubpostsBtn = $("#moreSubpostsButton");
 
@@ -94,7 +94,7 @@ $(window).load(function(){
         $("#subpostsTitle").text(subName);
 
         // more btn
-        moreSubpostsBtn.bind(iLepra.config.defaultTapEvent, function(e){
+        moreSubpostsBtn.bind("tap", function(e){
             // stops event to prevent random post opening
             e.preventDefault();
             e.stopPropagation();

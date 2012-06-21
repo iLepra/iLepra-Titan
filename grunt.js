@@ -7,6 +7,7 @@ module.exports = function(grunt) {
             logic: {
                 src: [
                     'Resources/html/js/templates.js',
+                    'Resources/html/js/prepare.js',
                     'Resources/html/js/main.js', 
                     'Resources/html/js/counters.js', 
                     'Resources/html/js/handlers.js',

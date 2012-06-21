@@ -1,26 +1,5 @@
-// fired up when phonegap is ready - this requires a phonegap.js file :|
-//document.addEventListener("deviceready", function(){
-//$(document).ready(function(){
+// prepare
 window.addEventListener('load', function(){
-    // jquery mobile stuff
-    $.support.cors = true;
-    $.mobile.allowCrossDomainPages = true;
-    $.mobile.pushStateEnabled = false;
-    $.mobile.loadingMessageTextVisible = true;
-    $.mobile.loadingMessage = "Загружаемся ...";
-    $.mobile.page.prototype.options.backBtnText = "Назад";
-    $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
-    $.mobile.defaultPageTransition = 'none';
-    $.mobile.defaultDialogTransition = 'none';
-    $(document).on(iLepra.config.defaultTapEvent, "a", function(e){
-        var link = $(this).attr('href');
-        if(link.indexOf('http://') != -1){
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            window.open(link);
-        }
-    });
-
     ////////
     var getLatestPosts = function(){
         // on posts data
@@ -48,7 +27,7 @@ window.addEventListener('load', function(){
         }
     });
 
-    $(document).on("pageshow", "#loginPage", function(){
+    $(document).on("pagebeforeshow", "#loginPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "iLepra"});
     	
     	Ti.API.log('ilepra auth: '+iLepra.isAuthenticated)
@@ -57,7 +36,7 @@ window.addEventListener('load', function(){
         $("#captchaImage").attr('src', iLepra.captchaURL);
 
         // bind yarr click
-        $("#loginButton").bind(iLepra.config.defaultTapEvent, function(){
+        $("#loginButton").bind("tap", function(){
             $.mobile.showPageLoadingMsg();
 
             // create auth data structure

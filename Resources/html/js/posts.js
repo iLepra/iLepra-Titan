@@ -34,11 +34,14 @@
     }
 
     // render page on creation
-    $(document).on('pagehide', "#postsPage", function(e){
+    Ti.App.addEventListener("iLepraPostBack", function(){
+       $.mobile.changePage("#postsPage"); 
+    });
+    $(document).on('pagebeforehide', "#postsPage", function(e){
     	Ti.App.fireEvent("iLepraOrganize", {show: false});
     	Ti.App.fireEvent("iLepraRefresh", {show: false});
     });
-    $(document).on('pageshow', "#postsPage", function(event){
+    $(document).on('pagebeforeshow', "#postsPage", function(event){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Главная"});
     	Ti.App.fireEvent("iLepraOrganize", {show: true});
     	Ti.App.fireEvent("iLepraRefresh", {show: true});
@@ -63,7 +66,7 @@
         initCounters();
 
         // more posts
-        morePostsBtn.bind(iLepra.config.defaultTapEvent, function(e){
+        morePostsBtn.bind("tap", function(e){
             // stops event to prevent random post opening
             e.preventDefault();
             e.stopPropagation();
@@ -118,6 +121,8 @@
     
     // refresh
     Ti.App.addEventListener('iLepraDoRefresh', function(e){
+        if( $.mobile.activePage.attr('id') != "postsPage" ) return;
+
         // show loader
         $.mobile.showPageLoadingMsg();
 
@@ -135,7 +140,7 @@
     });
 
     // show full post
-    $(document).on(iLepra.config.defaultTapEvent, "a.postListItem", function(e){
+    $(document).on("tap", "a.postListItem", function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
 
@@ -179,11 +184,12 @@
             }
         }
 
-        $.mobile.changePage("post_full.html");
+        Ti.App.fireEvent("iLepraPostShow");
+        $.mobile.changePage("#fullPostPage");
     });
 
     // render full post text
-    $(document).on('pagecreate', "#fullPostPage", function(){
+    $(document).on('pagebeforeshow', "#fullPostPage", function(){
         // render html
         $("#postContent").html(iLepra.post.current.body);
 
@@ -193,6 +199,4 @@
         $("#postTime").text(iLepra.post.current.when);
         $("#postRating").text(iLepra.post.current.rating);
     });
-
-
 })();

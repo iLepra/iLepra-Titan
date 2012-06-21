@@ -125,5 +125,68 @@
 	    </div>
 	</div>
 
+	<!-- FULL POST PAGE -->
+	<div data-role="page" id="fullPostPage">
+	    <div data-role="content">
+	        <div id="postContent"></div>
+
+	        <div class="postMenu">
+	            <a href="#" id="replyPost" style="display: none;"><img src="./css/img/reply_32.png" /></a>
+
+	            <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="float:right; width:70px;">
+	                <a href="#" id="postVoteup" data-role="button" style="opacity: 0.6;" data-theme="a">+</a>
+	                <a href="#" id="postVotedown" data-role="button" style="opacity: 0.6;" data-theme="a">-</a>
+	            </div>
+	        </div>
+
+	        <div class="ui-footer ui-bar-a" style="padding-left:4px; margin-left: -15px; margin-right: -15px;">
+	            <b id="postUser">username</b>,
+	            <span style="font-size:80%;">
+	                <img src="./css/img/comment_16.png" class="iconImage"> <span id="postComments">548 / 548</span>,
+	                <span id="postTime">сегодня в 11.26</span>
+	            </span>,
+	            <span style="font-weight: bold;" id="postRating">462</span>
+	        </div>
+
+	        <div data-role="controlgroup" data-type="horizontal" id="postCommentsButtonsGroup">
+	            <a href="#" id="postCommentsButton" data-role="button">Все комментарии</a>
+	            <a href="#" id="postNewCommentsButton" data-role="button">Новые</a>
+	        </div>
+	    </div>
+
+	    <div data-role="content" id="postCommentsContent" style="display:none; padding-top: 0px;">
+	        <!-- new / all selector -->
+	        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+	            <a href="#" id="allComments" data-role="button" data-theme="a" class="ui-btn-active">Все</a>
+	            <a href="#" id="newComments" data-role="button" data-theme="a">Новые</a>
+	        </div>
+	        <br/>
+
+	        <!-- comments list -->
+	        <ul data-role="listview" id="commentsList" data-icon="false" data-split-icon="false" data-divider-theme="a">
+	        </ul>
+
+	        <br/>
+	        <div data-role="controlgroup" data-type="horizontal" id="commentsButtons" style="padding-top: 10px;">
+	            <a href="#" data-role="button" id="moreCommentsButton" style="width:69%;">Еще? Еще!</a>
+	            <a href="#" data-role="button" id="allCommentsButton" style="width:29%;">Все</a>
+	        </div>
+	    </div>
+
+	    <div data-role="footer" data-position="fixed" data-theme="c" style="display:none; min-height: 40px;" id="commentsNavBar">
+	        <div class="postToolbarElement" id="commentsNavButtons">
+	            <a href="#" id="prevnew" style="float:left;"><img src="./css/img/voteup_32.png" /></a>
+	            <a href="#" id="nextnew" style="float:right;"><img src="./css/img/votedown_32.png" /></a>
+	        </div>
+	        <dir class="postToolbarElement" style="display: none;" id="commentsInputBar">
+	            <div class="ui-block-a" style="width:79%">
+	                <input type="text" id="commentInput" value="" placeholder="Написать комментарий" data-mini='true'  />
+	            </div>
+	            <div class="ui-block-b" style="width:19%">
+	                <a href="#" id="submitComment" data-role="button" data-mini='true' class="maxedFootButton">OK</a>
+	            </div>
+	        </dir>
+	    </div>
+
 </body>
 </html>

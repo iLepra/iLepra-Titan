@@ -1,7 +1,7 @@
 var profileName;
 
 (function(){
-    $(document).on(iLepra.config.defaultTapEvent, "ul li.postInfo", function(e){
+    $(document).on("tap", "ul li.postInfo", function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
 
@@ -11,7 +11,7 @@ var profileName;
     });
 
     // render page on creation
-    $(document).on('pageshow', "#profilePage", function(){
+    $(document).on('pagebeforeshow', "#profilePage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Профиль"});
     	
         $.mobile.showPageLoadingMsg()

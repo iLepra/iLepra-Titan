@@ -19,7 +19,7 @@
     }
 
     // render page on creation
-    $(document).on('pageshow', "#favsPage", function(){
+    $(document).on('pagebeforeshow', "#favsPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Избранное"});
     	
         favsList = $("#favsList");
@@ -39,7 +39,7 @@
             if( postLimit < iLepra.favouritePosts.length ){
                 moreFavsBtn.show();
                 // more posts click
-                moreFavsBtn.bind(iLepra.config.defaultTapEvent, function(event){
+                moreFavsBtn.bind("tap", function(event){
                     // stops event to prevent random post opening
                     event.preventDefault();
                     event.stopPropagation();

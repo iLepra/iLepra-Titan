@@ -18,7 +18,7 @@
     }
 
     // render page on creation
-    $(document).on('pageshow', "#mystuffPage", function(){
+    $(document).on('pagebeforeshow', "#mystuffPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Мои вещи"});
     	
         mystuffList = $("#mystuffList");
@@ -38,7 +38,7 @@
             if( postLimit < iLepra.myStuffPosts.length ){
                 mystuffMoreBtn.show();
                 // more posts click
-                mystuffMoreBtn.bind(iLepra.config.defaultTapEvent, function(e){
+                mystuffMoreBtn.bind("tap", function(e){
                     // stops event to prevent random post opening
                     e.preventDefault();
                     e.stopPropagation();

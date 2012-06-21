@@ -33,7 +33,7 @@ function ApplicationWindow() {
 	});
 	
 	// menu toggling
-	// animations
+	// menu animations
 	var isToggled = false;
 	var animateLeft	= Ti.UI.createAnimation({
 		left: 200,

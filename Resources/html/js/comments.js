@@ -46,7 +46,7 @@
 
     var prepareCommentsButtons = function(){
         // more posts click
-        $("#moreCommentsButton").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#moreCommentsButton").bind("tap", function(e){
             // stops event to prevent random post opening
             e.preventDefault();
             e.stopPropagation();
@@ -61,7 +61,7 @@
             renderNewComments();
             commentsList.listview('refresh');
         });
-        $("#allCommentsButton").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#allCommentsButton").bind("tap", function(e){
             // stops event to prevent random post opening
             e.preventDefault();
             e.stopPropagation();
@@ -74,10 +74,29 @@
         });
     }
 
+    // refresh
+    Ti.App.addEventListener('iLepraDoRefresh', function(){
+        Ti.API.log( $.mobile.activePage.attr('id') );
+        if( $.mobile.activePage.attr('id') != "fullPostPage" ) return;
+
+        // reload
+        reloadComments();
+    });
+
+    $(document).on('pagebeforeshow', "#fullPostPage", function(){
+        Ti.App.fireEvent("iLepraRefresh", {show: true});
+
+        $("#postCommentsButtonsGroup").show();
+
+        commentsList.empty();
+        commentsNav.hide();
+        $("#postCommentsContent").hide();
+        $("#replyPost").hide();
+        $("#commentsButtons").hide();
+    });
+
     // on post comments show
     $(document).on('pagecreate', "#fullPostPage", function(){
-    	Ti.App.fireEvent("iLepraChangeTitle", {title: ""});
-    	
         commentsLimit = iLepra.config.postIncrement;
 
         commentsList = $("#commentsList");
@@ -87,10 +106,15 @@
         commentsInput = $("#commentInput");
 
         // on comments request
-        $("#postCommentsButton").bind(iLepra.config.defaultTapEvent, reloadComments);
-        $("#refreshComments").bind(iLepra.config.defaultTapEvent, reloadComments);
+        $("#postCommentsButton").bind("tap", reloadComments);
+        $("#postNewCommentsButton").bind("tap", function(e){
+            $("#allComments").removeClass('ui-btn-active');
+            $("#newComments").addClass('ui-btn-active');
+            type = "new";
+            reloadComments(e);
+        });
 
-        $("#allComments").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#allComments").bind("tap", function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -102,7 +126,7 @@
             renderNewComments();
         });
 
-        $("#newComments").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#newComments").bind("tap", function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -114,7 +138,7 @@
             renderNewComments();
         });
 
-        $("#replyPost").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#replyPost").bind("tap", function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -124,7 +148,7 @@
             showCommentAdd();
         });
 
-        $("#prevnew").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#prevnew").bind("tap", function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -133,7 +157,7 @@
             if( com != null) $.mobile.silentScroll(com.offset().top);
         });
 
-        $("#nextnew").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#nextnew").bind("tap", function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -143,7 +167,7 @@
             if( com != null) $.mobile.silentScroll(com.offset().top);
         });
 
-        $("#postVoteup").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#postVoteup").bind("tap", function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -151,7 +175,7 @@
             $(this).next().css('opacity', 0.6);
             iLepra.post.votePost("p"+iLepra.post.current.id, "1");
         });
-        $("#postVotedown").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#postVotedown").bind("tap", function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -161,7 +185,7 @@
         });
 
         // submit comment
-        $("#submitComment").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#submitComment").bind("tap", function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -207,13 +231,13 @@
     });
 
     // on comment option pick
-    $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.reply", function(e) {
+    $(document).on("tap", "div.commentsMenu a.reply", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
 
         showCommentAdd();
     });
-    $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.voteup", function(e) {
+    $(document).on("tap", "div.commentsMenu a.voteup", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
 
@@ -221,7 +245,7 @@
         $(this).next().css('opacity', 0.3);
         iLepra.post.voteComment(commentId, "1");
     });
-    $(document).on(iLepra.config.defaultTapEvent, "div.commentsMenu a.votedown", function(e) {
+    $(document).on("tap", "div.commentsMenu a.votedown", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
 
@@ -231,7 +255,7 @@
     });
 
     // show comment menu
-    $(document).on(iLepra.config.defaultTapEvent, "#commentsList li", function(e){
+    $(document).on("tap", "#commentsList li", function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
 
@@ -251,8 +275,12 @@
     });
 
     var reloadComments = function(e){
-        e.preventDefault();
-        e.stopImmediatePropagation();
+        if(e){
+            try{
+                e.preventDefault();
+                e.stopImmediatePropagation();
+            }catch(error){}
+        }
 
         if(commentsLoading) return;
 
@@ -265,7 +293,7 @@
             $(document).unbind(event);
             //$.mobile.changePage("post_comments.html");
             $.mobile.hidePageLoadingMsg();
-            $("#postCommentsButton").hide();
+            $("#postCommentsButtonsGroup").hide();
             $("#postCommentsContent").show();
             $("#replyPost").show();
 

@@ -1,7 +1,8 @@
 function MainView() {
 	// vars
 	var showOrganize = false,
-		showRefresh = false;
+		showRefresh = false,
+		showBack = false;
 	
 	// view
 	var self = Ti.UI.createView({ width: 'auto', height: 'auto' });
@@ -15,7 +16,15 @@ function MainView() {
 	};
 	
 	var updateToolbar = function(){
-		var items = [menu, flexSpace, title, flexSpace];
+		var items;
+
+		if(showBack){
+			items = [back, flexSpace];
+			toolbar.items = items;
+		}else{
+			items = [menu, flexSpace, title, flexSpace];
+		}
+
 		if( showOrganize ){
 			items.push(organize);
 		}
@@ -55,6 +64,18 @@ function MainView() {
 	});
 	Ti.App.addEventListener("iLepraRefresh", function(data){
 		showRefresh = data.show;
+		updateToolbar();
+	});
+
+	var back = Ti.UI.createButton({ title: 'Назад' });
+	back.addEventListener('click', function(){
+		showBack = false;
+		updateToolbar();
+		Ti.App.fireEvent("iLepraPostBack");
+
+	});
+	Ti.App.addEventListener("iLepraPostShow", function(){
+		showBack = true;
 		updateToolbar();
 	});
 	

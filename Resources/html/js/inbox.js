@@ -18,7 +18,7 @@
     }
 
     // render page on creation
-    $(document).on('pageshow', "#inboxPage", function(){
+    $(document).on('pagebeforeshow', "#inboxPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Инбокс"});
     	
         inboxList = $("#inboxList");
@@ -38,7 +38,7 @@
             if( postLimit < iLepra.inboxPosts.length ){
                 moreInboxBtn.show();
                 // more posts click
-                moreInboxBtn.bind(iLepra.config.defaultTapEvent, function(event){
+                moreInboxBtn.bind("tap", function(event){
                     // stops event to prevent random post opening
                     event.preventDefault();
                     event.stopPropagation();

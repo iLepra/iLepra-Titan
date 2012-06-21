@@ -36,7 +36,7 @@ postTemplate = '\
                 <img />\
                 <b><%= user %></b>, \
                 <span style="font-size:80%;">\
-                <img src="css/img/comment_16.png" class="iconImage" />\
+                <img src="./css/img/comment_16.png" class="iconImage" />\
                 <% if(comments.indexOf("/") != -1){ %>\
                 <b><%= comments %></b>,\
                 <% }else{ %>\
@@ -64,13 +64,13 @@ commentTemplate = '\
             <li data-id="<%= id %>" data-user="<%= user %>" class="<%= newClass %>" <%= style %>>\
                 <p class="commentText"><%= text %></p>\
                 <div style="display:none;" class="commentsMenu">\
-                    <a href="#" class="reply"><img src="css/img/reply_32.png" /></a>\
+                    <a href="#" class="reply"><img src="./css/img/reply_32.png" /></a>\
                     <a href="#" class="voteup" style="float:right; \
                     <% if(vote == 1){ %>opacity: 1;<% }else{ %> opacity: 0.3; <% } %>\
-                    "><img src="css/img/voteup_32.png" /></a>\
+                    "><img src="./css/img/voteup_32.png" /></a>\
                     <a href="#" class="votedown" style="float:right; \
                     <% if(vote == -1){ %>opacity: 1;<% }else{ %> opacity: 0.3; <% } %>\
-                    "><img src="css/img/votedown_32.png" /></a>\
+                    "><img src="./css/img/votedown_32.png" /></a>\
                 </div>\
             </li>\
             <li data-role="list-divider" class="postInfo" data-user="<%= user %>" <%= style %>>\

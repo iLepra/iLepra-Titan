@@ -35,17 +35,17 @@
     }
 
     // render page on creation
-    $(document).on('pagehide', "#chatPage", function(){
+    $(document).on('pagebeforehide', "#chatPage", function(){
     	Ti.App.fireEvent("iLepraChatBar", {show: false});
     });
-    $(document).on('pageshow', "#chatPage", function(){
+    $(document).on('pagebeforeshow', "#chatPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Лепрочятик"});
     	Ti.App.fireEvent("iLepraChatBar", {show: true});
     	
         chatList = $("#chatList");
         chatInput = $("#chatInput");
 
-        $("#submitChat").bind(iLepra.config.defaultTapEvent, function(e){
+        $("#submitChat").bind("tap", function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
 
@@ -80,7 +80,7 @@
         clearInterval( refreshInterval );
     });
 
-    $(document).on(iLepra.config.defaultTapEvent, "li.chatMessage", function(e){
+    $(document).on("tap", "li.chatMessage", function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
 
