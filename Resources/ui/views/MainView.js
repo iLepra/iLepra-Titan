@@ -2,7 +2,8 @@ function MainView() {
 	// vars
 	var showOrganize = false,
 		showRefresh = false,
-		showBack = false;
+		showBack = false,
+		showMenu = true;
 	
 	// view
 	var self = Ti.UI.createView({ width: 'auto', height: 'auto' });
@@ -22,7 +23,11 @@ function MainView() {
 			items = [back, flexSpace];
 			toolbar.items = items;
 		}else{
-			items = [menu, flexSpace, title, flexSpace];
+			if(showMenu){
+				items = [menu, flexSpace, title, flexSpace];
+			}else{
+				items = [flexSpace, title, flexSpace];
+			}
 		}
 
 		if( showOrganize ){
@@ -47,6 +52,10 @@ function MainView() {
 	});
 	menu.addEventListener('click', function(){
 		Ti.App.fireEvent('iLepraToggleMenu');
+	});
+	Ti.App.addEventListener("iLepraMenuButton", function(data){
+		showMenu = data.show;
+		updateToolbar();
 	});
 	
 	// toolbar organize button
