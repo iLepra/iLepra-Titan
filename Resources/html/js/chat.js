@@ -38,7 +38,7 @@
     $(document).on('pagebeforehide', "#chatPage", function(){
     	Ti.App.fireEvent("iLepraChatBar", {show: false});
     });
-    $(document).on('pagebeforeshow', "#chatPage", function(){
+    $(document).on('pageshow', "#chatPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Лепрочятик"});
     	Ti.App.fireEvent("iLepraChatBar", {show: true});
     	

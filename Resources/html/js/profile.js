@@ -11,7 +11,7 @@ var profileName;
     });
 
     // render page on creation
-    $(document).on('pagebeforeshow', "#profilePage", function(){
+    $(document).on('pageshow', "#profilePage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Профиль"});
     	
         $.mobile.showPageLoadingMsg()

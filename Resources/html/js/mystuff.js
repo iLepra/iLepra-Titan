@@ -18,7 +18,7 @@
     }
 
     // render page on creation
-    $(document).on('pagebeforeshow', "#mystuffPage", function(){
+    $(document).on('pageshow', "#mystuffPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Мои вещи"});
     	
         mystuffList = $("#mystuffList");

@@ -18,7 +18,7 @@
     }
 
     // render page on creation
-    $(document).on('pagebeforeshow', "#inboxPage", function(){
+    $(document).on('pageshow', "#inboxPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Инбокс"});
     	
         inboxList = $("#inboxList");

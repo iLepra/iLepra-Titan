@@ -41,7 +41,7 @@
     	Ti.App.fireEvent("iLepraOrganize", {show: false});
     	Ti.App.fireEvent("iLepraRefresh", {show: false});
     });
-    $(document).on('pagebeforeshow', "#postsPage", function(event){
+    $(document).on('pageshow', "#postsPage", function(event){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Главная"});
     	Ti.App.fireEvent("iLepraOrganize", {show: true});
     	Ti.App.fireEvent("iLepraRefresh", {show: true});

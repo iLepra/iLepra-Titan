@@ -1,6 +1,6 @@
 (function(){
     // render page on creation
-    $(document).on('pagebeforeshow', "#govPage", function(){
+    $(document).on('pageshow', "#govPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "Белый дом"});
     	
         $.mobile.showPageLoadingMsg()

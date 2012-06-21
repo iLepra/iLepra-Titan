@@ -27,7 +27,7 @@ window.addEventListener('load', function(){
         }
     });
 
-    $(document).on("pagebeforeshow", "#loginPage", function(){
+    $(document).on("pageshow", "#loginPage", function(){
     	Ti.App.fireEvent("iLepraChangeTitle", {title: "iLepra"});
     	
     	Ti.API.log('ilepra auth: '+iLepra.isAuthenticated)
