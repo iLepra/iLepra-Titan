@@ -129,6 +129,9 @@ function MainView() {
 		width: Ti.App.config.screenWidth
 	});
 	self.add(web);
+	Ti.App.addEventListener("iLepraToggleWebView", function(data){
+		web.touchEnabled = data.enabled;
+	})
 	
 	// main page section picker
 	var picker = Ti.UI.createPicker({

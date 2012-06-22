@@ -51,6 +51,8 @@ function ApplicationWindow() {
 			self.animate(animateRight);
 			isToggled = false;
 		}
+
+		Ti.App.fireEvent("iLepraToggleWebView", {enabled: !isToggled});
 	});
 	
 	
