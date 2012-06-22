@@ -18,17 +18,19 @@ function LoadingView() {
 	});
 	self.add(image);
 	
-	//label 
-	var label = Ti.UI.createLabel({
-		color: '#FFFFFFF',
-		text: "Загружаемся..",
-		textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-		font: {fontSize: 24},
-		height: 'auto',
-		width: 'auto'
+	//loading indicator
+	var indicator = Titanium.UI.createActivityIndicator({
+		style: Ti.UI.iPhone.ActivityIndicatorStyle.BIG,
+		font:{fontFamily:'Arial', fontSize:18, fontWeight:'bold'},
+		color:'#fff',
+		message:'Загружаемся...',
+		height:'auto',
+		width:'auto'
 	});
-	self.add(label);
+	self.add(indicator);
 	
+	indicator.show();
+
 	return self;
 }
 
