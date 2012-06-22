@@ -68,10 +68,10 @@ function MainView() {
 	// toolbar menu button
 	var menu = Ti.UI.createButton({
 	    backgroundImage: '/icons/slidemenu_32.png',
-	    width: 22,
-	    height: 22,
-	    title: ''
+	    width: 20,
+	    height: 20
 	});
+	
 	menu.addEventListener('click', function(){
 		Ti.App.fireEvent('iLepraToggleMenu');
 	});
@@ -86,7 +86,7 @@ function MainView() {
 		Ti.App.fireEvent("iLepraDoRefresh");
 	});
 
-	var back = Ti.UI.createButton({ title: 'Назад' });
+	var back = Ti.UI.createButton({ title: 'Назад',style: Ti.UI.iPhone.SystemButtonStyle.BORDERED });
 	back.addEventListener('click', function(){
 		showBack = false;
 		updateToolbar();
