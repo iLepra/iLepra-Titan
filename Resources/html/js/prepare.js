@@ -16,4 +16,16 @@ window.addEventListener('load', function(){
             window.open(link);
         }
     });*/
+
+    // override show/hide loading msg to block menu
+    var oldShow = $.mobile.showPageLoadingMsg;
+    var oldHide = $.mobile.hidePageLoadingMsg;
+    $.mobile.showPageLoadingMsg = function(){
+        Ti.App.fireEvent("iLepraAllowMenu", {allow: false});
+        oldShow();
+    };
+    $.mobile.hidePageLoadingMsg = function(){
+        Ti.App.fireEvent("iLepraAllowMenu", {allow: true});
+        oldHide();
+    }
 });

@@ -35,6 +35,7 @@ function ApplicationWindow() {
 	// menu toggling
 	// menu animations
 	var isToggled = false;
+	var allowToggle = true;
 	var animateLeft	= Ti.UI.createAnimation({
 		left: 200,
 		duration: 300
@@ -43,7 +44,9 @@ function ApplicationWindow() {
 		left: 0,
 		duration: 200
 	});	
-	Ti.App.addEventListener('iLepraToggleMenu',function(e){
+	Ti.App.addEventListener('iLepraToggleMenu',function(){
+		if( !allowToggle ) return;
+		
 		if( !isToggled ){
 			self.animate(animateLeft);
 			isToggled = true;
@@ -54,6 +57,9 @@ function ApplicationWindow() {
 
 		Ti.App.fireEvent("iLepraToggleWebView", {enabled: !isToggled});
 	});
+	Ti.App.addEventListener("iLepraAllowMenu", function(data){
+		allowToggle = data.allow;
+	})
 	
 	
 	return self;
