@@ -41,7 +41,7 @@
 	            <img id="captchaImage" />
 	        </div>
 	
-	        <input type="text" name="captcha" id="captcha" placeholder="Капча"/>
+	        <input type="text" name="captcha" id="captcha" placeholder="Капча" autocorrect="off" autocapitalize="off"/>
 	
 	        <br/>
 	
@@ -92,7 +92,7 @@
 	</div>
 	
 	<!-- FAVS PAGE -->
-	<div data-role="page" id="favsPage" data-add-back-btn="true">
+	<div data-role="page" id="favsPage">
 	    <div data-role="content">
 	        <ul data-role="listview" id="favsList" data-divider-theme="a">
 	        </ul>
@@ -102,7 +102,7 @@
 	</div>
 	
 	<!-- SUBS PAGE -->
-	<div data-role="page" id="subsPage" data-add-back-btn="true">
+	<div data-role="page" id="subsPage">
 	    <div data-role="content">
 	        <ul data-role="listview" id="subsList">
 	        </ul>
@@ -110,7 +110,7 @@
 	</div>
 	
 	<!-- CHAT PAGE -->
-	<div data-role="page" id="chatPage" data-add-back-btn="true">
+	<div data-role="page" id="chatPage">
 	    <div data-role="content">
 	        <ul data-role="listview" id="chatList" data-divider-theme="a">
 	        </ul>
@@ -118,7 +118,7 @@
 	</div>
 	
 	<!-- GOV PAGE -->
-	<div data-role="page" id="govPage" data-add-back-btn="true">
+	<div data-role="page" id="govPage">
 	    <div data-role="content">
 	        <p id="president">
 	        </p>
@@ -187,6 +187,50 @@
 	            </div>
 	        </dir>
 	    </div>
+	</div>
+
+	<!-- PROFILE PAGE -->
+	<div data-role="page" id="profilePage">
+	    <div data-role="content" id="profileContent" style="display:none;">
+	        <div style="text-align: center;">
+	            <img id="userImage" />
+	        </div>
+	
+	        <ul data-role="listview" data-inset="true" data-divider-theme="a">
+	            <li data-role="list-divider" id="fullName"></li>
+	            <li id="userRegdate"></li>
+	            <li id="userLocation"></li>
+	            <li id="userNumber"></li>
+	            <li id="userKarma"></li>
+	        </ul>
+	
+	        <ul data-role="listview" data-inset="true" data-divider-theme="a">
+	            <li data-role="list-divider">Статистика</li>
+	            <li id="userStat"></li>
+	            <li id="userVote"></li>
+	            <li id="userVoteCount"></li>
+	        </ul>
+	
+	        <ul data-role="listview" id="contactsList" data-inset="true" data-divider-theme="a">
+	            <li data-role="list-divider">Контакты</li>
+	        </ul>
+	
+	        <div data-role="collapsible" data-collapsed="false">
+	            <h3>Дополнительно</h3>
+	            <p id="userDescription"></p>
+	        </div>
+	    </div>
+	</div>
+
+	<!-- SUBLEPRA POSTS -->
+	<div data-role="page" id="subpostsPage">
+	    <div data-role="content">
+	        <ul data-role="listview" id="subpostsList" data-divider-theme="a">
+	        </ul>
+	        <br/>
+	        <a href="#" data-role="button" id="moreSubpostsButton" style="display:none;">Еще? Еще!</a>
+	    </div>
+	</div>
 
 </body>
 </html>

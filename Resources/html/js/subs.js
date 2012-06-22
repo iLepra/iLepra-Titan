@@ -1,4 +1,4 @@
-$(window).load(function(){
+(function(){
     var subName = null,
         subUrl = null,
         postLimit = iLepra.config.postIncrement,
@@ -22,7 +22,9 @@ $(window).load(function(){
 
     // render page on creation
     $(document).on('pageshow', "#subsPage", function(){
-    	Ti.App.fireEvent("iLepraChangeTitle", {title: "Подлепры"});
+    	Ti.App.fireEvent("iLepraToolbarButtons", {title: "Подлепры"});
+
+        lastPages = ["#subsPage"];
     	
         subsList = $("#subsList");
         subsList.empty();
@@ -52,7 +54,7 @@ $(window).load(function(){
         subName = $(this).children('h1').text();
         subUrl = $(this).data('link');
 
-        $.mobile.changePage("more_subposts.html");
+        $.mobile.changePage("#subpostsPage");
     });
 
     // render posts
@@ -70,6 +72,15 @@ $(window).load(function(){
     }
 
     $(document).on('pagebeforeshow', "#subpostsPage", function(){
+        try{
+            subpostsList.empty();
+        }catch(e){};
+        Ti.App.fireEvent("iLepraToolbarButtons", {showBack: true, title: subName});
+    });
+    $(document).on('pagebeforehide', "#subpostsPage", function(){
+        Ti.App.fireEvent("iLepraToolbarButtons", {showBack: false});
+    });
+    $(document).on('pageshow', "#subpostsPage", function(){
         subpostsList = $("#subpostsList");
         moreSubpostsBtn = $("#moreSubpostsButton");
 
@@ -89,9 +100,6 @@ $(window).load(function(){
 
         // get posts
         iLepra.sub.getPosts(subUrl);
-
-        // title
-        $("#subpostsTitle").text(subName);
 
         // more btn
         moreSubpostsBtn.bind("tap", function(e){
@@ -124,4 +132,4 @@ $(window).load(function(){
             }
         });
     });
-});
+})();

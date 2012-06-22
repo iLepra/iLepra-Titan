@@ -29,10 +29,6 @@ module.exports = function(grunt) {
                 src: ['Resources/html/js/logic.concat.js'],
                 dest: 'Resources/html/js/logic.min.js'
             }
-        },
-        uglify: {
-            mangle: {toplevel: false},
-            squeeze: {dead_code: false}
         }
     });
 

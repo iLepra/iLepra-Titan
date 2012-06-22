@@ -28,13 +28,10 @@ window.addEventListener('load', function(){
     });
 
     $(document).on("pagebeforehide", "#loginPage", function(){
-        Ti.App.fireEvent("iLepraMenuButton", {show: true});
+        Ti.App.fireEvent("iLepraToolbarButtons", {showMenu: true});
     });
     $(document).on("pageshow", "#loginPage", function(){
-    	Ti.App.fireEvent("iLepraChangeTitle", {title: "iLepra"});
-        Ti.App.fireEvent("iLepraMenuButton", {show: false});
-    	
-    	Ti.API.log('ilepra auth: '+iLepra.isAuthenticated)
+        Ti.App.fireEvent("iLepraToolbarButtons", {showMenu: false, title: "iLepra"});
     	
         // load captcha
         $("#captchaImage").attr('src', iLepra.captchaURL);
@@ -68,7 +65,6 @@ window.addEventListener('load', function(){
 
             // prepare ready event
             $(document).bind(iLepra.events.ready, function(event){
-            	Ti.API.log('ready')
                 // unbind current event
                 $(document).unbind(event);
                 // unbind error event

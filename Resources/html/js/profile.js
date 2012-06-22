@@ -7,14 +7,24 @@ var profileName;
 
         profileName = $(this).data('user');
 
-        $.mobile.changePage("more_profile.html");
+        $.mobile.changePage("#profilePage");
     });
 
     // render page on creation
+    $(document).on('pagebeforeshow', "#profilePage", function(){
+        if( profileName == iLepra.username ){
+            Ti.App.fireEvent("iLepraToolbarButtons", {showBack: false, title: profileName});
+        }else{
+            Ti.App.fireEvent("iLepraToolbarButtons", {showBack: true, title: profileName});
+        }
+
+        $("#profileContent").hide();
+    });
+    $(document).on('pagebeforehide', "#profilePage", function(){
+        Ti.App.fireEvent("iLepraToolbarButtons", {showBack: false});
+    });
     $(document).on('pageshow', "#profilePage", function(){
-    	Ti.App.fireEvent("iLepraChangeTitle", {title: "Профиль"});
-    	
-        $.mobile.showPageLoadingMsg()
+        $.mobile.showPageLoadingMsg();
 
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
@@ -26,7 +36,7 @@ var profileName;
             var data = iLepra.profile.data;
 
             // set username
-            $("#profileUsername").text( data.username );
+            Ti.App.fireEvent("iLepraToolbarButtons", {title: data.username});
 
             // set userpic
             if( data.userpic != undefined )

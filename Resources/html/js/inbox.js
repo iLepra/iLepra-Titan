@@ -19,7 +19,9 @@
 
     // render page on creation
     $(document).on('pageshow', "#inboxPage", function(){
-    	Ti.App.fireEvent("iLepraChangeTitle", {title: "Инбокс"});
+    	Ti.App.fireEvent("iLepraToolbarButtons", {title: "Инбокс"});
+
+        lastPages = ["#inboxPage"];
     	
         inboxList = $("#inboxList");
         moreInboxBtn = $("#moreInboxButton");

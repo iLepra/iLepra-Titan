@@ -1,3 +1,5 @@
+var lastPages = [];
+
 (function(){
     var postLimit = iLepra.config.postIncrement,
         postsList = null,
@@ -33,19 +35,25 @@
         });
     }
 
+    $(document).on("pagebeforechange", function(e, ui){
+        if( $.mobile.activePage && !ui.options.reverse ){
+            var id = "#"+$.mobile.activePage.attr('id');
+            if( lastPages.indexOf(id) == -1 ) lastPages.push(id);
+        }
+    })
+
     // render page on creation
     Ti.App.addEventListener("iLepraPostBack", function(){
-       $.mobile.changePage("#postsPage"); 
+       $.mobile.changePage(lastPages.pop(), {reverse: true}); 
     });
     $(document).on('pagebeforehide', "#postsPage", function(e){
-    	Ti.App.fireEvent("iLepraOrganize", {show: false});
-    	Ti.App.fireEvent("iLepraRefresh", {show: false});
+        Ti.App.fireEvent("iLepraToolbarButtons", {showOrganize: false, showRefresh: false});
     });
     $(document).on('pageshow', "#postsPage", function(event){
-    	Ti.App.fireEvent("iLepraChangeTitle", {title: "Главная"});
-    	Ti.App.fireEvent("iLepraOrganize", {show: true});
-    	Ti.App.fireEvent("iLepraRefresh", {show: true});
-    	
+        Ti.App.fireEvent("iLepraToolbarButtons", {title: "Главная", showOrganize: true, showRefresh: true});
+
+        lastPages = ["#postsPage"];
+        
         postsList = $("#postsList");
         morePostsBtn = $("#morePostsButton");
 
@@ -102,10 +110,9 @@
     });
     
     Ti.App.addEventListener('iLepraMainChange', function(data){
-    	Ti.API.log(data);
         switch(data.val){
-        	case "main":
-            	prepareLayoutReadyEvent();
+            case "main":
+                prepareLayoutReadyEvent();
                 iLepra.switchLayout(1);
                 break;
             case "all":
@@ -116,7 +123,7 @@
                 prepareLayoutReadyEvent();
                 iLepra.switchLayout(2);
                 break;
-    	}
+        }
     });
     
     // refresh
@@ -183,8 +190,7 @@
                 }
             }
         }
-
-        Ti.App.fireEvent("iLepraPostShow");
+        
         $.mobile.changePage("#fullPostPage");
     });
 

@@ -20,7 +20,9 @@
 
     // render page on creation
     $(document).on('pageshow', "#favsPage", function(){
-    	Ti.App.fireEvent("iLepraChangeTitle", {title: "Избранное"});
+    	Ti.App.fireEvent("iLepraToolbarButtons", {title: "Избранное"});
+
+        lastPages = ["#favsPage"];
     	
         favsList = $("#favsList");
         moreFavsBtn = $("#moreFavsButton");

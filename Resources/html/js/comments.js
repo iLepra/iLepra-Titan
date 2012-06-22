@@ -76,15 +76,14 @@
 
     // refresh
     Ti.App.addEventListener('iLepraDoRefresh', function(){
-        Ti.API.log( $.mobile.activePage.attr('id') );
         if( $.mobile.activePage.attr('id') != "fullPostPage" ) return;
 
         // reload
         reloadComments();
     });
 
-    $(document).on('pagebeforeshow', "#fullPostPage", function(){
-        Ti.App.fireEvent("iLepraRefresh", {show: true});
+    $(document).on('pagebeforeshow', "#fullPostPage", function(e, ui){
+        Ti.App.fireEvent("iLepraToolbarButtons", {showRefresh: true, showBack: true});
 
         $("#postCommentsButtonsGroup").show();
 
@@ -94,6 +93,9 @@
         $("#replyPost").hide();
         $("#commentsButtons").hide();
     });
+    $(document).on('pagebeforehide', "#fullPostPage", function(){
+        Ti.App.fireEvent("iLepraToolbarButtons", {showBack: false, showRefresh: false});
+    })
 
     // on post comments show
     $(document).on('pagecreate', "#fullPostPage", function(){
@@ -291,7 +293,6 @@
         // on posts data
         $(document).bind(iLepra.events.ready, function(event){
             $(document).unbind(event);
-            //$.mobile.changePage("post_comments.html");
             $.mobile.hidePageLoadingMsg();
             $("#postCommentsButtonsGroup").hide();
             $("#postCommentsContent").show();

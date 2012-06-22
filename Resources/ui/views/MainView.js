@@ -3,7 +3,8 @@ function MainView() {
 	var showOrganize = false,
 		showRefresh = false,
 		showBack = false,
-		showMenu = true;
+		showMenu = true,
+		forceTitle = false;
 	
 	// view
 	var self = Ti.UI.createView({ width: 'auto', height: 'auto' });
@@ -21,7 +22,10 @@ function MainView() {
 
 		if(showBack){
 			items = [back, flexSpace];
-			toolbar.items = items;
+			if(forceTitle){
+				items.push(title);
+				items.push(flexSpace);
+			}
 		}else{
 			if(showMenu){
 				items = [menu, flexSpace, title, flexSpace];
@@ -42,6 +46,24 @@ function MainView() {
 		
 		toolbar.items = items;
 	}
+	Ti.App.addEventListener('iLepraToolbarButtons', function(data){
+		if(typeof data.showMenu != "undefined") 
+			showMenu = data.showMenu;
+		if(typeof data.showOrganize != "undefined") 
+			showOrganize = data.showOrganize;
+		if(typeof data.showRefresh != "undefined") 
+			showRefresh = data.showRefresh;
+		if(typeof data.showBack != "undefined") 
+			showBack = data.showBack;
+		if(typeof data.title != "undefined") 
+			title.text = data.title;
+		if( showBack &&  typeof data.title != "undefined"){ 
+			forceTitle = true;
+		}else{
+			forceTitle = false;
+		}
+		updateToolbar();
+	});
 	
 	// toolbar menu button
 	var menu = Ti.UI.createButton({
@@ -53,27 +75,15 @@ function MainView() {
 	menu.addEventListener('click', function(){
 		Ti.App.fireEvent('iLepraToggleMenu');
 	});
-	Ti.App.addEventListener("iLepraMenuButton", function(data){
-		showMenu = data.show;
-		updateToolbar();
-	});
 	
 	// toolbar organize button
 	var organize = Ti.UI.createButton({ systemButton: Titanium.UI.iPhone.SystemButton.BOOKMARKS });
 	organize.addEventListener('click', togglePicker);
-	Ti.App.addEventListener("iLepraOrganize", function(data){
-		showOrganize = data.show;
-		updateToolbar();
-	});
 	
 	// toolbar refresh button
 	var refresh = Ti.UI.createButton({ systemButton: Titanium.UI.iPhone.SystemButton.REFRESH });
 	refresh.addEventListener('click', function(){
 		Ti.App.fireEvent("iLepraDoRefresh");
-	});
-	Ti.App.addEventListener("iLepraRefresh", function(data){
-		showRefresh = data.show;
-		updateToolbar();
 	});
 
 	var back = Ti.UI.createButton({ title: 'Назад' });
@@ -81,11 +91,6 @@ function MainView() {
 		showBack = false;
 		updateToolbar();
 		Ti.App.fireEvent("iLepraPostBack");
-
-	});
-	Ti.App.addEventListener("iLepraPostShow", function(){
-		showBack = true;
-		updateToolbar();
 	});
 	
 	// toolbar title
@@ -98,9 +103,6 @@ function MainView() {
 			fontWeight: 'bold',
 			fontSize: 16
 		}
-	});
-	Ti.App.addEventListener("iLepraChangeTitle", function(data){
-		title.text = data.title;
 	});
 	
 	// toolbar spacer
