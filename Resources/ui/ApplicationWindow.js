@@ -4,6 +4,7 @@ function ApplicationWindow() {
 	var LoadingView = require('ui/views/LoadingView');
 	var MainView = require('ui/views/MainView');
 	var SideMenuView = require('ui/views/SideMenuView');
+	var WebBrowser = require('ui/views/WebBrowser');
 		
 	//create component instance
 	var self = Ti.UI.createWindow({
@@ -59,7 +60,13 @@ function ApplicationWindow() {
 	});
 	Ti.App.addEventListener("iLepraAllowMenu", function(data){
 		allowToggle = data.allow;
-	})
+	});
+	
+	// handle external links
+	Ti.App.addEventListener("iLepraExternalLink", function(data){
+		var browser = new WebBrowser(data.url);
+		browser.open();
+	});
 	
 	
 	return self;

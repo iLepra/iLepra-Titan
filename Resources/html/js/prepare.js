@@ -8,14 +8,17 @@ window.addEventListener('load', function(){
     $.mobile.fixedtoolbar.prototype.options.tapToggle = false;
     $.mobile.defaultPageTransition = 'none';
     $.mobile.defaultDialogTransition = 'none';
-    /*$(document).on(iLepra.config.defaultTapEvent, "a", function(e){
+    
+    // override link handling
+    $(document).on(iLepra.config.defaultTapEvent, "a", function(e){
         var link = $(this).attr('href');
         if(link.indexOf('http://') != -1){
             e.preventDefault();
             e.stopImmediatePropagation();
-            window.open(link);
+            //window.open(link);
+            Ti.App.fireEvent("iLepraExternalLink", {url: link});
         }
-    });*/
+    });
 
     // override show/hide loading msg to block menu
     var oldShow = $.mobile.showPageLoadingMsg;
